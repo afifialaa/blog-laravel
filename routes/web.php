@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::post('/user', [UserController::class, 'create']);
+Route::delete('/user/{email}', [UserController::class, 'delete']);
+Route::get('/user/{email}', [UserController::class, 'read']);
+
+// Returns CSRF token
+Route::get('/token', function () {
+    return csrf_token(); 
 });

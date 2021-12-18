@@ -23,7 +23,7 @@ class UserController extends Controller
 
     // Deletes user
     function delete(Request $request, $email){
-        User::findOrFail($email)->delete();
+        User::where('email', $email)->delete();
         return response('User was deleted', 200);
     }
 
@@ -34,7 +34,7 @@ class UserController extends Controller
     }
 
     function read_id(Request $request, $id){
-        $user = User::findOrFail($email)->delete();
+        $user = User::find($id);
         return $user;
     }
 

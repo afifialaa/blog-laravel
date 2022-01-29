@@ -16,9 +16,22 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
 
-        $user->save();
+        try {
+            $user->save();
+        } catch (\Illuminate\Database\QueryException $e){
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == '1062'){
+                return response('user already created', 409);
+            }
+        }
 
         return response('user was created', 201);
+    }
+
+    function login(Request $request){
+        $email = $request->email;
+        $user = User::where('email', $email);
+        return csrf_token(); 
     }
 
     // Deletes user

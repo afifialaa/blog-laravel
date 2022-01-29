@@ -16,18 +16,17 @@ use App\Http\Controllers\CommentController;
 |
 */
 
+/* User */
 Route::post('/user', [UserController::class, 'create']);
+Route::post('/user/login', [UserController::class, 'login']);
 Route::delete('/user/{email}', [UserController::class, 'delete']);
 Route::get('/user/{email}', [UserController::class, 'read']);
 
-Route::post('/article', [ArticleController::class, 'create']);
-Route::delete('/article/{id}', [ArticleController::class, 'delete']);
-Route::get('/article/{id}', [ArticleController::class, 'read']);
+/* Article */
+Route::post('/blog/article', [ArticleController::class, 'create']);
+Route::delete('/blog/article/{id}', [ArticleController::class, 'delete']);
+Route::get('/blog/article/{id}', [ArticleController::class, 'read']);
 
+/* Comment */
 Route::post('/article/{article_id}/comment', [CommentController::class, 'create']);
 Route::delete('/article/{article_id}/comment/{id}', [CommentController::class, 'delete']);
-
-// Returns CSRF token
-Route::get('/token', function () {
-    return csrf_token(); 
-});

@@ -29,4 +29,5 @@ Route::get('/blog/article/{id}', [ArticleController::class, 'read']);
 
 /* Comment */
 Route::post('/article/{article_id}/comment', [CommentController::class, 'create']);
+Route::get('/article/{article_id}/comments', [CommentController::class, 'read']);
 Route::delete('/article/{article_id}/comment/{id}', [CommentController::class, 'delete']);

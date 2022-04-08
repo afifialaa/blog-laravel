@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Models\Article;
 
 class CommentController extends Controller
 {
@@ -24,4 +25,14 @@ class CommentController extends Controller
         Comment::findOrFail($id)->delete();
         return response('Comment was deleted', 200);
     }
+
+    // Read comments of an article
+    function read(Request $request, $article_id){
+        $article = Article::find(1);
+        return $article->comments;
+    }
+
+
 }
+
+

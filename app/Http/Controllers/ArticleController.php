@@ -14,6 +14,7 @@ class ArticleController extends Controller
 		$article->content = $request->content;
 		$article->description = $request->description;
 		$article->user_id = $request->user_id;
+		$article->view_count = 0;
 
 		$article->save();
 		return response('Article was created', 201);
@@ -28,6 +29,7 @@ class ArticleController extends Controller
 	// Returns an article by id
 	function read(Request $request, $id){
 		$article = Article::find($id);
+		$article->increment('view_count');
 		return $article;
 	}
 }

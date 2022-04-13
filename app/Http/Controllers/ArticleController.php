@@ -8,8 +8,16 @@ use App\Models\Article;
 class ArticleController extends Controller
 {
 
+	// Returns all articles 5 by 5
 	function index(Request $request){
-		$articles = Article::all;
+		// $articles = Article::all()->paginate(5);
+		$articles = Article::paginate(5);
+		return response()->json(['articles' => $articles], 200);
+	}
+
+	function paginate(Request $request, $page){
+		$articles = Article::paginate()->url($page);
+		$pagination = $articles->url($page);
 		return response()->json(['articles' => $articles], 200);
 	}
 

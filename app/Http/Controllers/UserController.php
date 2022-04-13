@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -15,6 +16,8 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->api_token = Str::random(60);
+
 
         try {
             $user->save();
@@ -25,13 +28,7 @@ class UserController extends Controller
             }
         }
 
-        return response('user was created', 201);
-    }
-
-    function login(Request $request){
-        $email = $request->email;
-        $user = User::where('email', $email);
-        return csrf_token(); 
+        return response($user->api_token, 201);
     }
 
     // Deletes user

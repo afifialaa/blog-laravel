@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Http\Request;
+use Illuminate\Http\Closure;
 
 class Authenticate extends Middleware
 {
@@ -18,4 +20,11 @@ class Authenticate extends Middleware
             return route('login');
         }
     }
+
+    /* public function handle(Request $request, $next){
+        if($request->email == 'admin@gmail.com'){
+            return $next($request);
+        }
+        return 'not an admin email';
+    } */
 }

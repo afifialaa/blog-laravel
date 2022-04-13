@@ -18,6 +18,13 @@ return [
         'passwords' => 'users',
     ],
 
+
+    'api' => [
+        'driver' => 'token',
+        'provider' => 'users',
+        'hash' => true,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -40,6 +47,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => true,
+        ]
     ],
 
     /*
@@ -60,15 +72,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
+        //'users' => [
+            // 'driver' => 'eloquent',
+            // 'model' => App\Models\User::class,
         // ],
+
+         'users' => [
+            'driver' => 'database',
+            'table' => 'users',
+        ],
     ],
 
     /*

@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,9 @@ Route::get('/blog/articles/{page}', [ArticleController::class, 'paginate']);
 Route::post('/article/{article_id}/comment', [CommentController::class, 'create'])->middleware('auth:sanctum');
 Route::delete('/article/{article_id}/comment/{id}', [CommentController::class, 'delete'])->middleware('auth:sanctum');
 Route::get('/article/{article_id}/comments', [CommentController::class, 'index']);
+
+/* Favorite */
+Route::post('/blog/user/favorite/{article_id}', [FavoriteController::class, 'create'])->middleware('auth:sanctum');
+Route::get('/blog/user/favorite', [FavoriteController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/blog/user/favorite/{article_id}', [FavoriteController::class, 'read'])->middleware('auth:sanctum');
+Route::delete('/blog/user/favorite/{artilce_id}', [FavoriteController::class, 'delete'])->middleware('auth:sanctum');

@@ -30,6 +30,7 @@ Route::get('/user/{email}', [UserController::class, 'read']);
 /* Article */
 Route::post('/blog/article', [ArticleController::class, 'create'])->middleware('auth:sanctum');
 Route::delete('/blog/article/{id}', [ArticleController::class, 'delete'])->middleware('auth:sanctum');
+Route::put('/blog/article/{id}', [ArticleController::class, 'update'])->middleware('auth:sanctum');
 Route::get('/blog/article/{id}', [ArticleController::class, 'read'])->middleware('auth:sanctum');
 Route::get('/blog/articles', [ArticleController::class, 'index']);
 Route::get('/blog/articles/{page}', [ArticleController::class, 'paginate']);

@@ -26,6 +26,7 @@ class ArticleController extends Controller
     function create(Request $request){
 		$article = new Article;
 
+		$article->title = $request->title;
 		$article->content = $request->content;
 		$article->description = $request->description;
 		$article->user_id = $request->user()->id;
@@ -50,5 +51,16 @@ class ArticleController extends Controller
 		$article = Article::find($id);
 		$article->increment('view_count');
 		return response()->json(['article' => article], 200);
+	}
+
+	function update(Request $request, $id)
+	{
+		$article = Article::find($id)->where('user_id', $request->user()->id)->firstOrFail();
+		$res = $article->fill($request->input())->save();
+
+		if($res){
+			return response()->json(['msg' => 'Article was updated'], 200);
+		}
+		return response()->json(['msg' => 'Article was not updated'], 500);
 	}
 }

@@ -13,7 +13,7 @@ class CommentController extends Controller
     function index(Request $request, $article_id){
         $article = Article::find($article_id);
         $comments = $article->comments;
-        return reponse()->json(['comments' => $comments]);
+        return response()->json(['comments' => $comments]);
     }
 
     // Creates a new comment

@@ -50,7 +50,7 @@ class ArticleController extends Controller
 	function read(Request $request, $id){
 		$article = Article::find($id);
 		$article->increment('view_count');
-		return response()->json(['article' => article], 200);
+		return response()->json(['article' => $article], 200);
 	}
 
 	function update(Request $request, $id)
